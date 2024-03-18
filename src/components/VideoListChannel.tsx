@@ -1,20 +1,48 @@
 import React from "react";
 import "../styles/cardVideo.css";
+import {useState} from 'react'
+import { useAuth } from "../context/AuthContext";
 
 interface VideoListProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   searchResults: any[];
 }
 
+interface SelectedVideo {
+  id:{
+  videoId: string;
+  }
+}
+
 const VideoListChannel: React.FC<VideoListProps> = ({ searchResults }) => {
   // Filtrar el primer elemento si no es un vídeo
   const filteredResults = searchResults.length > 0 && !searchResults[0].id.videoId ? searchResults.slice(1) : searchResults;
 
+  const [selectedVideo, setSelectedVideo] = useState<SelectedVideo | null>(null)
+  console.log(selectedVideo)
+  const handlerId = (video) => {
+    setSelectedVideo(video)
+  }
+
+  const auth = useAuth();
+
+  const handleGoogle = (e) => {
+    e.preventDefault();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    auth.loginWithGoogle();
+  };
+
   const renderedList = filteredResults.map((video, index) => {
     const videoUrl = `https://www.youtube.com/embed/${video.id.videoId}`;
+    const videoUrlSelected = selectedVideo ? `https://www.youtube.com/embed/${selectedVideo.id.videoId}`: '';
     return (
-      <div key={index} className='flex'>
-        <iframe width="300" height="170" src={videoUrl} className="rounded-md" title={video.snippet.title}></iframe>
+      <div key={index}>
+        <div className="flex justify-between">
+        <p className="font-semibold cursor-pointer" onClick={() => handlerId(video)}>Ver en simultaneo</p>
+        <p className="font-semibold cursor-pointer" onClick={handleGoogle}>Elegir una cuenta</p>
+        </div>
+        <iframe width="300" height="170" src={videoUrlSelected ? videoUrlSelected : videoUrl} className="rounded-md" title={video.snippet.title}></iframe>
       </div>
     );
   });

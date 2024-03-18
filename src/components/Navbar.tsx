@@ -31,13 +31,15 @@ const Navbar = ({ onSearch }) => {
   return (
     <nav className="bg-slate-100 w-full h-20 flex justify-between items-center px-5">
       <div className="flex items-center gap-3">
+        <Link to='/' onClick={handleLogoClick}>
         <FaVideo className="text-xl mt-1" />
+        </Link>
         <h1 className="text-black text-2xl font-medium">
         <Link to='/' onClick={handleLogoClick}>Streamr</Link>
         </h1>
       </div>
       <form onSubmit={handlerSubmit} className="relative">
-        <div className="flex items-center justify-center min-h-screen">
+        <div className="flex items-center justify-center">
         <GoogleSignInButton />
           <div
             className="flex items-center max-w-md mx-auto bg-white rounded-lg "
@@ -48,7 +50,7 @@ const Navbar = ({ onSearch }) => {
                 onChange={(event) => handlerChange(event)}
                 value={searchTerm}
                 className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
-                placeholder="Buscar videos/canal"
+                placeholder="Buscar videos"
                 x-model="search"
               />
             </div>
