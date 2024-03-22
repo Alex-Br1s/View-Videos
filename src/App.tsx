@@ -6,7 +6,6 @@ import searchVideos from "./api/searchVideos";
 import { BrowserRouter as Router } from "react-router-dom";
 import videosMostPopular from "./api/videosMostPopular";
 import VideoMostPopular from "./components/VideoMostPopular";
-import Pagination from "./components/Pagination";
 import loandingGif from "/loading-7528_256.gif";
 
 const App: React.FC = () => {
@@ -14,17 +13,6 @@ const App: React.FC = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [showPopularVideos, setShowPopularVideos] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [videosPerPage] = useState(16);
-
-  const videosTotal = searchResults && searchResults.length > 0 ? searchResults.length : popularVideosList.length;
-  const lastIndex = currentPage * videosPerPage;
-  const firstIndex = lastIndex - videosPerPage;
-
-  const currentVideos = showPopularVideos
-  ? (popularVideosList && popularVideosList.length > 0 ? popularVideosList.slice(firstIndex, lastIndex) : [])
-  : (searchResults && searchResults.length > 0 ? searchResults.slice(firstIndex, lastIndex) : []);
-
 
   const handlerSearch = async (searchTerm: string) => {
     try {
@@ -56,30 +44,20 @@ const App: React.FC = () => {
     getVideoMostPopular();
   }, []);
 
-  const onPageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
-
   return (
     <AuthProvider>
       <Router>
         <div>
           <Navbar onSearch={handlerSearch} />
-          <Pagination
-            currentPage={currentPage}
-            videosPerPage={videosPerPage}
-            videosTotal={videosTotal}
-            onPageChange={onPageChange}
-          />
           {isLoading && (
             <div className="loading-container">
               <img className="h-16" src={loandingGif} alt="Loading" />
             </div>
           )}
           {!isLoading && showPopularVideos ? (
-            <VideoMostPopular currentVideos={currentVideos} />
+            <VideoMostPopular currentVideos={popularVideosList} />
           ) : (
-            <VideoListChannel searchResults={currentVideos} />
+            <VideoListChannel searchResults={searchResults} />
           )}
         </div>
       </Router>

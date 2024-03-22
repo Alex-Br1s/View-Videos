@@ -36,7 +36,7 @@ const VideoMostPopular: React.FC<VideoListProps> = ({currentVideos}) => {
         <p className="font-semibold cursor-pointer" onClick={() => handlerId(video)}>Ver en simultaneo</p>
         <p className="font-semibold cursor-pointer" onClick={handleGoogle} >Elegir una cuenta</p>
         </div>
-        <iframe width="270" height="150" src={videoUrlSelected ? videoUrlSelected : videoUrl} className="rounded-md" title={video.title}></iframe>
+        <iframe width="300" height="170" src={videoUrlSelected ? videoUrlSelected : videoUrl} className="rounded-md" title={video.title}></iframe>
       </div>
     );
   });

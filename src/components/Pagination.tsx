@@ -1,4 +1,4 @@
-
+/* 
 interface PaginationProps {
   currentPage: number;
   videosPerPage: number;
@@ -88,3 +88,4 @@ const Pagination: React.FC<PaginationProps> = ({
 };
 
 export default Pagination;
+ */
