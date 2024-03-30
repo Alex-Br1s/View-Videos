@@ -37,10 +37,11 @@ const Navbar = ({ onSearch }) => {
         <h1 className="text-black text-2xl font-medium">
         <Link to='/' onClick={handleLogoClick}>Streamr</Link>
         </h1>
+        <GoogleSignInButton />
       </div>
       <form onSubmit={handlerSubmit} className="relative">
         <div className="flex items-center justify-center">
-        <GoogleSignInButton />
+       
           <div
             className="flex items-center max-w-md mx-auto bg-white rounded-lg "
            

@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/cardVideo.css";
 import {useState} from 'react'
-import { useAuth } from "../context/AuthContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 interface VideoListProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -24,13 +24,11 @@ const VideoListChannel: React.FC<VideoListProps> = ({ searchResults }) => {
     setSelectedVideo(video)
   }
 
-  const auth = useAuth();
+  const {loginWithRedirect} = useAuth0()
 
-  const handleGoogle = (e) => {
-    e.preventDefault();
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
-    auth.loginWithGoogle();
+  const handleGoogle = () => {
+    console.log("Antes de iniciar sesión");
+    loginWithRedirect();
   };
 
   const renderedList = filteredResults.map((video, index) => {

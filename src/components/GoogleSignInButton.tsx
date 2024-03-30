@@ -1,18 +1,19 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import { useAuth } from "../context/AuthContext";
+
+import { useAuth0 } from "@auth0/auth0-react";
 
 const GoogleSignInButton = () => {
-  const auth = useAuth();
+  //const auth = useAuth();
 
-  const handleGoogle = (e) => {
-    e.preventDefault();
-    //@ts-ignore
-    auth.loginWithGoogle();
+  const {loginWithRedirect} = useAuth0()
+
+  const handleLogin = () => {
+    console.log("Antes de iniciar sesión");
+    loginWithRedirect();
   };
 
   return (
     <div className="flex items-center">
-      <button onClick={(e) => handleGoogle(e)}>
+      <button onClick={handleLogin}>
         <svg
         className='h-14'
           xmlns="http://www.w3.org/2000/svg"
