@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import VideoListChannel from "./components/VideoListChannel";
 import { AuthProvider } from "./context/AuthContext";
 import searchVideos from "./api/searchVideos";
-import { BrowserRouter as Router } from "react-router-dom";
 import videosMostPopular from "./api/videosMostPopular";
 import VideoMostPopular from "./components/VideoMostPopular";
 import loandingGif from "/loading-7528_256.gif";
@@ -47,7 +47,7 @@ const App: React.FC = () => {
   return (
     <AuthProvider>
       <Router>
-        <div>
+        <div>           
           <Navbar onSearch={handlerSearch} />
           {isLoading && (
             <div className="loading-container">

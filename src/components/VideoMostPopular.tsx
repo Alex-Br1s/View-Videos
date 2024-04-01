@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+//import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "../context/AuthContext";
 
 interface VideoListProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -16,11 +18,15 @@ const VideoMostPopular: React.FC<VideoListProps> = ({currentVideos}) => {
     setSelectedVideo(video)
   }
 
-  const {loginWithRedirect} = useAuth0()
+  //const {loginWithRedirect} = useAuth0()
+
+  const auth = useAuth()
 
   const handleGoogle = () => {
     console.log("Antes de iniciar sesión");
-    loginWithRedirect();
+    //loginWithRedirect();
+    //@ts-ignore
+    auth.loginWithGoogle();
   };
 
 

@@ -1,14 +1,17 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
-import { useAuth0 } from "@auth0/auth0-react";
+//import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "../context/AuthContext";
 
 const GoogleSignInButton = () => {
-  //const auth = useAuth();
+  const auth = useAuth();
 
-  const {loginWithRedirect} = useAuth0()
+  //const {loginWithRedirect} = useAuth0()
 
   const handleLogin = () => {
     console.log("Antes de iniciar sesión");
-    loginWithRedirect();
+    //@ts-ignore
+    auth.loginWithGoogle()
   };
 
   return (
